@@ -1,4 +1,5 @@
-#include <stdio.h>
+#include <iostream>
+using namespace std;
 
 #define FILAS 3
 #define COLUMNAS 3
@@ -11,12 +12,12 @@ void transpuesta(int matriz[FILAS][COLUMNAS], int resultado[COLUMNAS][FILAS]) {
     }
 }
 
-void imprimirMatriz(int filas, int columnas, int matriz[filas][columnas]) {
+void imprimirMatriz(int filas, int columnas, int* matriz) {
     for (int i = 0; i < filas; i++) {
         for (int j = 0; j < columnas; j++) {
-            printf("%d\t", matriz[i][j]);
+            cout << *((matriz + i * columnas) + j) << "\t";
         }
-        printf("\n");
+        cout << endl;
     }
 }
 
@@ -31,11 +32,11 @@ int main() {
 
     transpuesta(matriz, resultado);
 
-    printf("Matriz original:\n");
-    imprimirMatriz(FILAS, COLUMNAS, matriz);
+    cout << "Matriz original:\n";
+    imprimirMatriz(FILAS, COLUMNAS, (int*)matriz);
 
-    printf("\nMatriz transpuesta:\n");
-    imprimirMatriz(COLUMNAS, FILAS, resultado);
+    cout << "\nMatriz transpuesta:\n";
+    imprimirMatriz(COLUMNAS, FILAS, (int*)resultado);
 
     return 0;
 }
